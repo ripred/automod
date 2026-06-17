@@ -1,5 +1,3 @@
----
-
 # AutoMod Version Control Template for Reddit Communities
 
 [![Python](https://flat.badgen.net/badge/Python/3.x/3776ab?labelColor=24292f)](https://www.python.org/downloads/)
