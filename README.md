@@ -2,10 +2,10 @@
 
 # AutoMod Version Control Template for Reddit Communities
 
-[![Python](https://img.shields.io/static/v1?style=flat&label=Python&message=3.x&color=3776ab&labelColor=24292f)](https://www.python.org/downloads/)
-[![License](https://img.shields.io/static/v1?style=flat&label=License&message=MIT&color=0969da&labelColor=24292f)](https://github.com/ripred/automod/blob/main/LICENSE)
-[![Stars](https://img.shields.io/static/v1?style=flat&label=Stars&message=0&color=bf8700&labelColor=24292f)](https://github.com/ripred/automod/stargazers)
-[![Forks](https://img.shields.io/static/v1?style=flat&label=Forks&message=0&color=6f42c1&labelColor=24292f)](https://github.com/ripred/automod/network/members)
+[![Python](https://flat.badgen.net/badge/Python/3.x/3776ab?labelColor=24292f)](https://www.python.org/downloads/)
+[![License](https://flat.badgen.net/badge/License/MIT/0969da?labelColor=24292f)](https://github.com/ripred/automod/blob/main/LICENSE)
+[![Stars](https://flat.badgen.net/badge/Stars/0/bf8700?labelColor=24292f)](https://github.com/ripred/automod/stargazers)
+[![Forks](https://flat.badgen.net/badge/Forks/0/6f42c1?labelColor=24292f)](https://github.com/ripred/automod/network/members)
 
 This repository provides a template for managing and syncing Reddit AutoMod configurations using GitHub workflows and Python scripts.
 
