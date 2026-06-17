@@ -3,6 +3,9 @@ name: Fetch AutoMod Configuration
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   fetch-automod:
     runs-on: ubuntu-latest
@@ -12,17 +15,22 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
           python-version: '3.x'
 
       - name: Install PRAW
-        run: pip install praw
+        run: |
+          python -m pip install --upgrade pip
+          pip install praw
 
       - name: Fetch AutoMod Configuration from Reddit
         env:
           REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
           REDDIT_SECRET: ${{ secrets.REDDIT_SECRET }}
+          REDDIT_REFRESH_TOKEN: ${{ secrets.REDDIT_REFRESH_TOKEN }}
+          REDDIT_USER_AGENT: ${{ secrets.REDDIT_USER_AGENT }}
           REDDIT_USERNAME: ${{ secrets.REDDIT_USERNAME }}
           REDDIT_PASSWORD: ${{ secrets.REDDIT_PASSWORD }}
           SUBREDDIT_NAME: ${{ secrets.SUBREDDIT_NAME }}
@@ -30,8 +38,12 @@ jobs:
 
       - name: Commit and Push changes
         run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          if git diff --quiet -- automod/automoderator.yml; then
+            echo "No AutoModerator changes to commit."
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add automod/automoderator.yml
           git commit -m "Update automoderator.yml from subreddit"
           git push

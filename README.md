@@ -55,12 +55,22 @@ This manual workflow fetches the current AutoMod configuration from Reddit and u
 Ensure the following secrets are set up in your GitHub repository under **Settings > Secrets and variables > Actions**:
 
 - `REDDIT_CLIENT_ID` 
-- `REDDIT_SECRET`
-- `REDDIT_USERNAME`
-- `REDDIT_PASSWORD`
+- `REDDIT_CLIENT_SECRET`
+- `REDDIT_REFRESH_TOKEN`
+- `REDDIT_USER_AGENT`
 - `SUBREDDIT_NAME` 
 
-These secrets are used by the Python scripts to interact with Reddit’s API.
+These secrets are used by the Python scripts to interact with Reddit’s API. `REDDIT_REFRESH_TOKEN` is preferred so GitHub Actions does not need to store a Reddit account password.
+
+For compatibility with older deployments, the scripts still accept `REDDIT_SECRET` instead of `REDDIT_CLIENT_SECRET`, and `REDDIT_USERNAME` plus `REDDIT_PASSWORD` instead of `REDDIT_REFRESH_TOKEN`.
+
+To generate a refresh token, create a Reddit web application with redirect URI `http://localhost:8080`, export `REDDIT_CLIENT_ID`, `REDDIT_CLIENT_SECRET`, and `REDDIT_USER_AGENT` locally, then run:
+
+```bash
+python obtain_reddit_refresh_token.py
+```
+
+Store the printed value as the `REDDIT_REFRESH_TOKEN` Actions secret.
 
 ---
 

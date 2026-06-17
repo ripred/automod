@@ -1,25 +1,26 @@
-import praw
+#!/usr/bin/env python3
+"""Push the repository AutoModerator configuration to Reddit."""
+
+from __future__ import annotations
+
 import os
+from pathlib import Path
 
-def update_automod_config():
-    reddit = praw.Reddit(
-        client_id=os.environ['REDDIT_CLIENT_ID'],
-        client_secret=os.environ['REDDIT_SECRET'],
-        username=os.environ['REDDIT_USERNAME'],
-        password=os.environ['REDDIT_PASSWORD'],
-        user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36'
-    )
+from reddit_auth import configured_subreddit_name, reddit_client
 
-    subreddit = reddit.subreddit(os.environ['SUBREDDIT_NAME'])  
 
-    with open('automod/automoderator.yml', 'r') as file:
-        automod_config = file.read()
+def update_automod_config() -> None:
+    """Update Reddit AutoModerator wiki content from this repository."""
+    reddit = reddit_client()
+    subreddit = reddit.subreddit(configured_subreddit_name())
+    automod_config = Path("automod/automoderator.yml").read_text(encoding="utf-8")
 
-    committer = os.environ['GITHUB_ACTOR']
-    commit_id = os.environ['GITHUB_SHA']
+    committer = os.environ.get("GITHUB_ACTOR", "local")
+    commit_id = os.environ.get("GITHUB_SHA", "unknown")
     commit_reason = f"Changes by {committer} on {commit_id}"
 
-    subreddit.wiki['config/automoderator'].edit(automod_config, reason=commit_reason)
+    subreddit.wiki["config/automoderator"].edit(automod_config, reason=commit_reason)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     update_automod_config()
