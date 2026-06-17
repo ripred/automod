@@ -3,8 +3,6 @@
 
 # AutoMod Version Control Template for Reddit Communities
 
-[![Fetch Automod](https://github.com/ripred/automod/actions/workflows/fetch_automod.yaml/badge.svg)](https://github.com/ripred/automod/actions/workflows/fetch_automod.yaml)
-[![Update Automod](https://github.com/ripred/automod/actions/workflows/update-automod.yml/badge.svg)](https://github.com/ripred/automod/actions/workflows/update-automod.yml)
 [![License](https://flat.badgen.net/github/license/ripred/automod)](https://github.com/ripred/automod/blob/main/LICENSE)
 [![Stars](https://flat.badgen.net/github/stars/ripred/automod)](https://github.com/ripred/automod/stargazers)
 [![Forks](https://flat.badgen.net/github/forks/ripred/automod)](https://github.com/ripred/automod/network/members)
